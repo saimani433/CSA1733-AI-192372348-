@@ -1,0 +1,30 @@
+% Student info
+print_student_info :-
+    write('192311318-G siva dhana sekhar'), nl.
+
+% Check if a character is a vowel
+is_vowel(Char) :-
+    member(Char, [a, e, i, o, u, A, E, I, O, U]).
+
+% Count vowels in a list of characters
+count_vowels([], 0).
+count_vowels([H|T], Count) :-
+    is_vowel(H),
+    count_vowels(T, Rest),
+    Count is Rest + 1.
+count_vowels([H|T], Count) :-
+    \+ is_vowel(H),
+    count_vowels(T, Count).
+
+% Convert string to char list and count vowels
+count_vowels_in_string(String, Count) :-
+    string_chars(String, CharList),
+    count_vowels(CharList, Count).
+
+% Main predicate
+run_vowel_counter :-
+    print_student_info,
+    Input = "Prolog is Awesome!",
+    format('Input String: ~w~n', [Input]),
+    count_vowels_in_string(Input, Count),
+    format('Number of vowels: ~w~n', [Count]).
