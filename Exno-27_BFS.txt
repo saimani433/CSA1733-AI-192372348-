@@ -1,0 +1,54 @@
+% Print name and roll number
+start :-
+    write('192311318- G siva dhana sekhar'), nl,
+    best_first_search(a, Goal, Path),
+    write('Goal: '), write(Goal), nl,
+    write('Path: '), write(Path), nl.
+
+% Define edges and heuristic values
+% edge(Node, Neighbor, Cost)
+edge(a, b, 1).
+edge(a, c, 2).
+edge(b, d, 4).
+edge(b, e, 5).
+edge(c, f, 3).
+edge(c, g, 6).
+
+% Heuristic value: h(Node, HeuristicCost)
+h(a, 5).
+h(b, 3).
+h(c, 2).
+h(d, 0).  % goal
+h(e, 4).
+h(f, 6).
+h(g, 7).
+
+% Goal node
+goal(d).
+
+% Best First Search algorithm
+best_first_search(Start, Goal, Path) :-
+    bfs([[Start]], Goal, RevPath),
+    reverse(RevPath, Path).
+
+% BFS implementation
+bfs([[Goal|Rest]|_], Goal, [Goal|Rest]).
+bfs([CurrentPath|OtherPaths], Goal, FinalPath) :-
+    CurrentPath = [CurrentNode|_],
+    findall([NextNode|CurrentPath],
+            (edge(CurrentNode, NextNode, _),
+             \+ member(NextNode, CurrentPath)),  % avoid cycles
+            NewPaths),
+    sort_paths_by_heuristic(NewPaths, SortedNewPaths),
+    append(SortedNewPaths, OtherPaths, UpdatedPaths),
+    bfs(UpdatedPaths, Goal, FinalPath).
+
+% Sort paths by heuristic of the head node
+sort_paths_by_heuristic(Paths, Sorted) :-
+    map_list_to_pairs(path_heuristic, Paths, Pairs),
+    keysort(Pairs, SortedPairs),
+    pairs_values(SortedPairs, Sorted).
+
+% Get heuristic value of the head of a path
+path_heuristic([Node|_], H) :-
+    h(Node, H).
