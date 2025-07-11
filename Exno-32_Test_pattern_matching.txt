@@ -1,0 +1,43 @@
+% Student info
+print_student_info :-
+    write('192311318-G Siva dhana sekhar'), nl.
+
+% Pattern matching predicates
+match_pattern(X, pattern(a, b)) :-
+    X = pattern(a, b).
+
+match_pattern(X, pattern(_, Y)) :-
+    X = pattern(a, Y).
+
+match_pattern(X, pattern(Z, Z)) :-
+    X = pattern(Z, Z).
+
+% Main predicate to demonstrate pattern matching
+test_pattern_matching :-
+    print_student_info,
+    write('Testing Pattern Matching in Prolog:'), nl,
+
+    Pattern1 = pattern(a, b),
+    Pattern2 = pattern(a, X),
+    Pattern3 = pattern(Y, Y),
+
+    write('Trying to match pattern(a, b)...'), nl,
+    ( match_pattern(Pattern1, pattern(a, b)) ->
+        write('Matched: pattern(a, b)'), nl
+    ;
+        write('No match.'), nl
+    ),
+
+    write('Trying to match pattern(a, X)...'), nl,
+    ( match_pattern(Pattern2, pattern(a, X)) ->
+        write('Matched: pattern(a, X)'), nl
+    ;
+        write('No match.'), nl
+    ),
+
+    write('Trying to match pattern(Y, Y)...'), nl,
+    ( match_pattern(Pattern3, pattern(Y, Y)) ->
+        write('Matched: pattern(Y, Y)'), nl
+    ;
+        write('No match.'), nl
+    ).
