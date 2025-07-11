@@ -1,0 +1,43 @@
+% Monkey and Banana Problem in Prolog
+
+% Initial state: monkey is at door, box is at window, monkey is on floor, monkey does not have banana
+% Representation: state(MonkeyPosition, MonkeyStatus, BoxPosition, HasBanana)
+
+% Goal state: monkey has banana
+goal(state(_, _, _, has)).
+
+% Move rules
+move(state(middle, onbox, middle, has), _):-
+    write('Monkey already has the banana.'), nl.
+
+% Monkey climbs box
+move(state(P, onfloor, P, hasnot), climb, state(P, onbox, P, hasnot)).
+
+% Monkey pushes box
+move(state(P1, onfloor, P1, hasnot), push(P1, P2), state(P2, onfloor, P2, hasnot)).
+
+% Monkey walks to a new position
+move(state(P1, onfloor, B, hasnot), walk(P1, P2), state(P2, onfloor, B, hasnot)).
+
+% Monkey grabs banana
+move(state(middle, onbox, middle, hasnot), grasp, state(middle, onbox, middle, has)).
+
+% Plan predicate: finds a sequence of actions to reach the goal
+plan(State, [], State) :- goal(State).
+
+plan(State1, [Action|Rest], State3) :-
+    move(State1, Action, State2),
+    plan(State2, Rest, State3).
+
+% Start solving the problem
+solve :-
+    write('192311318-G siva dhana sekhar'), nl,
+    plan(state(atdoor, onfloor, atwindow, hasnot), Plan, _),
+    write('Plan to get the banana: '), nl,
+    print_plan(Plan).
+
+% Print the plan
+print_plan([]).
+print_plan([H|T]) :-
+    write(H), nl,
+    print_plan(T).
