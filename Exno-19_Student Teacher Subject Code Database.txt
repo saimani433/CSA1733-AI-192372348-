@@ -1,0 +1,23 @@
+% student_teacher_subject.pl
+
+% Facts: student name, teacher name, subject and code
+student_teacher_subject('192311318', 'G siva dhana sekhar', 'Dr. Sharma', 'Computer Science', 'CS101').
+student_teacher_subject('192311319', 'Ravi Kumar', 'Dr. Gupta', 'Mathematics', 'MATH102').
+student_teacher_subject('192311320', 'Anjali Sharma', 'Prof. Verma', 'Physics', 'PHYS103').
+
+% Print student details along with teacher, subject, and code
+show_student_details(RegNo) :-
+    student_teacher_subject(RegNo, Name, Teacher, Subject, Code),
+    write('Reg. No: '), write(RegNo), nl,
+    write('Name: '), write(Name), nl,
+    write('Teacher: '), write(Teacher), nl,
+    write('Subject: '), write(Subject), nl,
+    write('Subject Code: '), write(Code), nl, nl.
+
+% Entry point
+:- initialization(main).
+
+main :-
+    write('192311268 - G siva dhana sekhar'), nl,
+    show_student_details('192311318'),
+    show_student_details('192311319').
