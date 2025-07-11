@@ -1,0 +1,35 @@
+% Print name and roll number and start diagnosis
+start :-
+    write('192311318-G siva dhana sekhar'), nl,
+    diagnose.
+
+% Rule-based diagnosis using symptoms
+diagnose :-
+    write('Answer with yes. or no.'), nl,
+    ( has_fever, has_cough, has_fatigue ->
+        write('Diagnosis: You may have the flu.');
+      has_fever, has_rash, has_red_eyes ->
+        write('Diagnosis: You may have measles.');
+      has_fever, has_cough, has_short_breath ->
+        write('Diagnosis: You may have COVID-19.');
+      has_stomach_pain, has_vomiting, has_diarrhea ->
+        write('Diagnosis: You may have food poisoning.');
+      write('Diagnosis: Unable to determine based on current symptoms.')
+    ), nl.
+
+% Ask the user for symptoms (backtracking allows trying all possibilities)
+has_fever :- symptom(fever).
+has_cough :- symptom(cough).
+has_fatigue :- symptom(fatigue).
+has_rash :- symptom(rash).
+has_red_eyes :- symptom(red_eyes).
+has_short_breath :- symptom(shortness_of_breath).
+has_stomach_pain :- symptom(stomach_pain).
+has_vomiting :- symptom(vomiting).
+has_diarrhea :- symptom(diarrhea).
+
+% Ask user if they have a symptom
+symptom(S) :-
+    write('Do you have '), write(S), write('? '),
+    read(Reply),
+    Reply == yes.
