@@ -1,0 +1,20 @@
+% name_dob.pl
+
+% Facts: name and date of birth
+dob('G siva dhana sekhar', '2003-06-15').
+dob('Anjali Sharma', '2002-11-23').
+dob('Rahul Verma', '2004-01-10').
+dob('Sneha Rao', '2001-08-30').
+
+% Print Name and DOB
+show_dob(Name) :-
+    dob(Name, DOB),
+    write(Name), write(' was born on '), write(DOB), nl.
+
+% Entry point
+:- initialization(main).
+
+main :-
+    write('192311318 - G siva dhana sekhar'), nl,
+    show_dob('G siva dhana sekhar'),
+    show_dob('Anjali Sharma').
