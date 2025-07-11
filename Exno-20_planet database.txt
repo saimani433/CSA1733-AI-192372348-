@@ -1,0 +1,30 @@
+% planets.pl
+
+% Facts: planet name and the type of planet
+planet('Mercury', 'Terrestrial').
+planet('Venus', 'Terrestrial').
+planet('Earth', 'Terrestrial').
+planet('Mars', 'Terrestrial').
+planet('Jupiter', 'Gas Giant').
+planet('Saturn', 'Gas Giant').
+planet('Uranus', 'Ice Giant').
+planet('Neptune', 'Ice Giant').
+
+% Print planet details
+show_planet_details(Planet) :-
+    planet(Planet, Type),
+    write(Planet), write(' is a '), write(Type), nl.
+
+% Entry point
+:- initialization(main).
+
+main :-
+    write('192311318 - G siva dhana sekhar'), nl,
+    show_planet_details('Mercury'),
+    show_planet_details('Venus'),
+    show_planet_details('Earth'),
+    show_planet_details('Mars'),
+    show_planet_details('Jupiter'),
+    show_planet_details('Saturn'),
+    show_planet_details('Uranus'),
+    show_planet_details('Neptune').
