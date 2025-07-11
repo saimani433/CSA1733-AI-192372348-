@@ -1,0 +1,33 @@
+% Facts: Birds and their ability to fly
+can_fly('sparrow').
+can_fly('eagle').
+can_fly('parrot').
+
+% Facts: Birds that cannot fly
+cannot_fly('penguin').
+cannot_fly('ostrich').
+cannot_fly('kiwi').
+
+% Rule to check if a bird can fly
+bird_can_fly(Bird) :-
+    can_fly(Bird),    % If the bird is listed in the can_fly facts
+    write(Bird), write(' can fly'), nl.
+
+bird_can_fly(Bird) :-
+    cannot_fly(Bird), % If the bird is listed in the cannot_fly facts
+    write(Bird), write(' cannot fly'), nl.
+
+% Entry point (optional)
+:- initialization(main).
+
+main :-
+    % Print your name
+    write('192311318-G siva dhana sekhar'), nl,
+    nl, % Add some space before the results
+    
+    % Test the program with some birds
+    bird_can_fly('sparrow'),
+    bird_can_fly('eagle'),
+    bird_can_fly('penguin'),
+    bird_can_fly('ostrich'),
+    bird_can_fly('kiwi').
