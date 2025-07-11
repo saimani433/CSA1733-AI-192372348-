@@ -1,0 +1,20 @@
+% student info
+print_student_info :-
+    write('192311318-G siva dhana sekhar'), nl.
+
+% facts
+fact(a).
+fact(b).
+
+% rules (backward chaining)
+goal(c) :- fact(a), fact(b).
+goal(d) :- goal(c).
+
+% main query
+backward_chaining(Goal) :-
+    print_student_info,
+    ( goal(Goal) ->
+        format('Goal ~w is TRUE.~n', [Goal])
+    ;
+        format('Goal ~w is FALSE or cannot be proven.~n', [Goal])
+    ).
