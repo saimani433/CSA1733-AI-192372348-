@@ -1,0 +1,36 @@
+% student info
+print_student_info :-
+    write('192311318-G siva dhana sekhar'), nl.
+
+% facts
+fact(a).
+fact(b).
+
+% rules (inference rules)
+rule(c) :- fact(a), fact(b).
+rule(d) :- rule(c).
+
+% forward chaining engine
+forward_chaining :-
+    print_student_info,
+    write('Starting forward chaining...'), nl,
+    fc([], Inferred),
+    write('Inferred facts: '), write(Inferred), nl.
+
+% forward chaining helper
+fc(Facts, NewFacts) :-
+    infer(Facts, New),
+    append(Facts, New, Combined),
+    sort(Combined, Sorted),  % remove duplicates
+    ( Facts == Sorted ->
+        NewFacts = Sorted
+    ;
+        fc(Sorted, NewFacts)
+    ).
+
+% inference rules application
+infer(Facts, New) :-
+    findall(F, (
+        rule(F),
+        \+ member(F, Facts)
+    ), New).
