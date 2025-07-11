@@ -1,0 +1,15 @@
+% Move N disks from Source to Target using Auxiliary as a helper peg
+hanoi(0, _, _, _) :- !.  % Base case: No disks to move, do nothing
+hanoi(N, Source, Target, Auxiliary) :-
+    N > 0,
+    M is N - 1,
+    write('192311318-G siva dhana sekhar'),
+    hanoi(M, Source, Auxiliary, Target),  % Move N-1 disks from Source to Auxiliary
+    write('Move disk '), write(N), write(' from '), write(Source), write(' to '), write(Target), nl,
+    hanoi(M, Auxiliary, Target, Source).  % Move N-1 disks from Auxiliary to Target
+
+% Entry point
+:- initialization(main).
+
+main :-
+    hanoi(3, a, c, b).  % Call the hanoi predicate to solve for 3 disks
