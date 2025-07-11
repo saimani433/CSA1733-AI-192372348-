@@ -1,0 +1,70 @@
+% Facts: Diseases and their symptoms
+disease('Gastritis', 'stomach pain').
+disease('Gastritis', 'nausea').
+disease('Gastritis', 'indigestion').
+
+disease('Ulcer', 'stomach pain').
+disease('Ulcer', 'vomiting').
+disease('Ulcer', 'bloating').
+
+disease('Food Poisoning', 'nausea').
+disease('Food Poisoning', 'vomiting').
+disease('Food Poisoning', 'diarrhea').
+
+disease('Lactose Intolerance', 'bloating').
+disease('Lactose Intolerance', 'diarrhea').
+disease('Lactose Intolerance', 'stomach cramps').
+
+disease('Celiac Disease', 'abdominal pain').
+disease('Celiac Disease', 'bloating').
+disease('Celiac Disease', 'diarrhea').
+
+% Facts: Causes of diseases
+cause('Gastritis', 'alcohol').
+cause('Gastritis', 'stress').
+cause('Ulcer', 'bacterial infection').
+cause('Ulcer', 'long-term use of painkillers').
+cause('Food Poisoning', 'contaminated food').
+cause('Lactose Intolerance', 'inability to digest lactose').
+cause('Celiac Disease', 'gluten').
+
+% Rule to find symptoms of a disease
+symptoms_of_disease(Disease, Symptoms) :-
+    findall(Symptom, disease(Disease, Symptom), Symptoms).
+
+% Rule to find possible causes of a disease
+causes_of_disease(Disease, Causes) :-
+    findall(Cause, cause(Disease, Cause), Causes).
+
+% Entry point
+:- initialization(main).
+
+main :-
+    write('Digestive System Disease Information - by G Siva Dhana Sekhar-192311318'), nl,
+    nl, % Add a newline before the results
+    
+    % Query for diseases and their symptoms
+    write('Symptoms of Gastritis:'), nl,
+    symptoms_of_disease('Gastritis', Symptoms1),
+    write(Symptoms1), nl,
+
+    write('Symptoms of Ulcer:'), nl,
+    symptoms_of_disease('Ulcer', Symptoms2),
+    write(Symptoms2), nl,
+
+    write('Symptoms of Food Poisoning:'), nl,
+    symptoms_of_disease('Food Poisoning', Symptoms3),
+    write(Symptoms3), nl,
+
+    % Query for causes of diseases
+    write('Causes of Gastritis:'), nl,
+    causes_of_disease('Gastritis', Causes1),
+    write(Causes1), nl,
+
+    write('Causes of Ulcer:'), nl,
+    causes_of_disease('Ulcer', Causes2),
+    write(Causes2), nl,
+
+    write('Causes of Food Poisoning:'), nl,
+    causes_of_disease('Food Poisoning', Causes3),
+    write(Causes3), nl.
