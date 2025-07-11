@@ -1,0 +1,40 @@
+% Facts: Parent-Child relationships
+parent('John', 'Alice').
+parent('John', 'Bob').
+parent('Alice', 'Charlie').
+parent('Alice', 'David').
+parent('Bob', 'Eva').
+parent('Eva', 'Frank').
+
+% Define your name in the family tree
+parent('G Siva Dhana Sekhar', 'Charlie'). % Example: You (G Siva Dhana Sekhar) are a parent of Charlie.
+
+% Rule to check if X is a parent of Y
+is_parent(X, Y) :-
+    parent(X, Y).
+
+% Rule to find the siblings of a person Y
+siblings(X, Y) :-
+    parent(P, X),
+    parent(P, Y),
+    X \= Y.
+
+% Rule to find the grandparents of a person Y
+grandparent(X, Y) :-
+    parent(X, Z),
+    parent(Z, Y).
+
+% Entry point
+:- initialization(main).
+
+main :-
+    write('Family Tree Program - by G Siva Dhana Sekhar-192311318'), nl,
+    nl, % Space before the results
+    write('Checking relationships for Charlie:'), nl,
+    is_parent('John', 'Alice'), nl,
+    write('Siblings of Charlie:'), nl,
+    siblings('Charlie', Sibling),
+    write(Sibling), nl,
+    write('Grandparents of Charlie:'), nl,
+    grandparent(Grandparent, 'Charlie'),
+    write(Grandparent), nl.
