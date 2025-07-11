@@ -1,0 +1,18 @@
+% Fruit and its color facts
+color(apple, red).
+color(banana, yellow).
+color(grape, purple).
+color(orange, orange).
+color(kiwi, green).
+color(blueberry, blue).
+
+% Predicate to find and print all fruit-color pairs using backtracking
+print_fruits :-
+    write('192311318-G siva dhana sekhar'), nl,
+    write('Fruits and their colors:'), nl,
+    color(Fruit, Color),
+    write(Fruit), write(' - '), write(Color), nl,
+    fail.  % force backtracking to find all solutions
+
+% Add a success clause so Prolog ends gracefully after backtracking
+print_fruits.
